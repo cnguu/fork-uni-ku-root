@@ -73,7 +73,10 @@ export default function UniKuRoot(options?: UniKuRootOptions): Plugin {
     async transform(code, id) {
       let ms: MagicString | null = null
 
-      const filterMain = createFilter(`${rootPath}/main.(ts|js)`)
+      const filterMain = createFilter([
+        `${rootPath}/main.ts`,
+        `${rootPath}/main.js`,
+      ])
       if (filterMain(id)) {
         ms = await registerKuApp(code, options.rootFileName)
       }
